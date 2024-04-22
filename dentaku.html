@@ -10,131 +10,313 @@
   </head>
 
   <body>
-    <table class="calculator">
-      <tr>
-        <td colspan="6" class="screen">1234567890</td>
-      </tr>
-      <tr>
-        <td class="force_hide_border" colspan="4">
-          <table class="slider-switch">
-            <tr>
-              <th><label for="rounding-f">F</label></th>
-              <th><label for="rounding-cut">CUT</label></th>
-              <th><label for="rounding-up">UP</label></th>
-              <th><label for="rounding-54">5/4</label></th>
-            </tr>
-            <tr>
-              <td>
-                <input
-                  type="radio"
-                  id="rounding-f"
-                  name="rounding"
-                  value="f"
-                  checked
-                />
-              </td>
-              <td>
-                <input
-                  type="radio"
-                  id="rounding-cut"
-                  name="rounding"
-                  value="cut"
-                />
-              </td>
-              <td>
-                <input
-                  type="radio"
-                  id="rounding-up"
-                  name="rounding"
-                  value="up"
-                />
-              </td>
-              <td>
-                <input
-                  type="radio"
-                  id="rounding-54"
-                  name="rounding"
-                  value="54"
-                />
-              </td>
-            </tr>
-          </table>
-          <table class="slider-switch">
-            <tr>
-              <th><label for="decimals-4">4</label></th>
-              <th><label for="decimals-2">2</label></th>
-              <th><label for="decimals-0">0</label></th>
-              <th><label for="decimals-add2">ADD2</label></th>
-            </tr>
-            <tr>
-              <td>
-                <input
-                  type="radio"
-                  id="decimals-4"
-                  name="decimals"
-                  value="4"
-                  checked
-                />
-              </td>
-              <td>
-                <input type="radio" id="decimals-2" name="decimals" value="2" />
-              </td>
-              <td>
-                <input type="radio" id="decimals-0" name="decimals" value="0" />
-              </td>
-              <td>
-                <input
-                  type="radio"
-                  id="decimals-add2"
-                  name="decimals"
-                  value="add2"
-                />
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class="color-lightgreen hoverable">税抜</td>
-        <td class="color-lightgreen hoverable">税込</td>
-      </tr>
-      <tr>
-        <td class="color-dark-grey hoverable">時間計算</td>
-        <td class="color-dark-blue hoverable">M+</td>
-        <td class="color-dark-blue hoverable">M-</td>
-        <td class="color-dark-blue hoverable">MR</td>
-        <td class="color-dark-blue hoverable">MC</td>
-        <td class="color-dark-grey hoverable">GT</td>
-      </tr>
-      <tr>
-        <td class="color-dark-grey hoverable">AC</td>
-        <td class="color-grey hoverable">7</td>
-        <td class="color-grey hoverable">8</td>
-        <td class="color-grey hoverable">9</td>
-        <td class="color-dark-grey hoverable">%</td>
-        <td class="color-dark-grey hoverable">√</td>
-      </tr>
-      <tr>
-        <td class="color-dark-grey hoverable">+/-</td>
-        <td class="color-grey hoverable">4</td>
-        <td class="color-grey hoverable">5</td>
-        <td class="color-grey hoverable">6</td>
-        <td class="color-dark-grey hoverable">&times;</td>
-        <td class="color-dark-grey hoverable">&div;</td>
-      </tr>
-      <tr>
-        <td class="color-dark-grey hoverable">&#x2bc8;</td>
-        <td class="color-grey hoverable">1</td>
-        <td class="color-grey hoverable">2</td>
-        <td class="color-grey hoverable">3</td>
-        <td class="color-dark-grey hoverable" rowspan="2">+</td>
-        <td class="color-dark-grey hoverable">-</td>
-      </tr>
-      <tr>
-        <td class="color-magenta hoverable">C</td>
-        <td class="color-grey hoverable">0</td>
-        <td class="color-grey hoverable">00</td>
-        <td class="color-grey hoverable">.</td>
-        <td class="color-dark-grey hoverable">=</td>
-      </tr>
-    </table>
+    <noscript> Please enable javascript to use the calculator. </noscript>
+    <div id="calculator">
+      <table class="calculator">
+        <tr>
+          <td id="calc_screen" colspan="6" class="screen">0</td>
+        </tr>
+        <tr>
+          <td class="force_hide_border" colspan="4">
+            <table class="slider-switch">
+              <tr>
+                <th><label for="rounding-f">F</label></th>
+                <th><label for="rounding-cut">CUT</label></th>
+                <th><label for="rounding-up">UP</label></th>
+                <th><label for="rounding-54">5/4</label></th>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="radio"
+                    id="rounding-f"
+                    name="rounding"
+                    value="f"
+                    checked
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="rounding-cut"
+                    name="rounding"
+                    value="cut"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="rounding-up"
+                    name="rounding"
+                    value="up"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="rounding-54"
+                    name="rounding"
+                    value="54"
+                  />
+                </td>
+              </tr>
+            </table>
+            <table class="slider-switch">
+              <tr>
+                <th><label for="decimals-4">4</label></th>
+                <th><label for="decimals-2">2</label></th>
+                <th><label for="decimals-0">0</label></th>
+                <th><label for="decimals-add2">ADD2</label></th>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="radio"
+                    id="decimals-4"
+                    name="decimals"
+                    value="4"
+                    checked
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="decimals-2"
+                    name="decimals"
+                    value="2"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="decimals-0"
+                    name="decimals"
+                    value="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    id="decimals-add2"
+                    name="decimals"
+                    value="add2"
+                  />
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <button id="btn_tax_excluded" class="color-lightgreen hoverable">
+              税抜
+            </button>
+          </td>
+          <td>
+            <button id="btn_tax_included" class="color-lightgreen hoverable">
+              税込
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="btn_time_op" class="color-dark-grey hoverable">
+              時間計算
+            </button>
+          </td>
+          <td>
+            <button id="btn_mem_add" class="color-dark-blue hoverable">
+              M+
+            </button>
+          </td>
+          <td>
+            <button id="btn_mem_subtract" class="color-dark-blue hoverable">
+              M-
+            </button>
+          </td>
+          <td>
+            <button id="btn_mem_recall" class="color-dark-blue hoverable">
+              MR
+            </button>
+          </td>
+          <td>
+            <button id="btn_mem_clear" class="color-dark-blue hoverable">
+              MC
+            </button>
+          </td>
+          <td>
+            <button id="btn_gt" class="color-dark-grey hoverable">GT</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="btn_ac" class="color-dark-grey hoverable">AC</button>
+          </td>
+          <td>
+            <button
+              id="btn_7"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(7)"
+            >
+              7
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_8"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(8)"
+            >
+              8
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_9"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(9)"
+            >
+              9
+            </button>
+          </td>
+          <td>
+            <button id="btn_percent" class="color-dark-grey hoverable">
+              %
+            </button>
+          </td>
+          <td>
+            <button id="btn_sqrt" class="color-dark-grey hoverable">
+              sqrt
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="btn_plus_minus" class="color-dark-grey hoverable">
+              +/-
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_4"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(4)"
+            >
+              4
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_5"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(5)"
+            >
+              5
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_6"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(6)"
+            >
+              6
+            </button>
+          </td>
+          <td>
+            <button id="btn_multiply" class="color-dark-grey hoverable">
+              &times;
+            </button>
+          </td>
+          <td>
+            <button id="btn_divide" class="color-dark-grey hoverable">
+              &div;
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button id="btn_right" class="color-dark-grey hoverable">▶</button>
+          </td>
+          <td>
+            <button
+              id="btn_1"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(1)"
+            >
+              1
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_2"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(2)"
+            >
+              2
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_3"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(3)"
+            >
+              3
+            </button>
+          </td>
+          <td rowspan="2">
+            <div style="height: 100%">
+              <button id="btn_add" class="color-dark-grey hoverable">+</button>
+            </div>
+          </td>
+          <td>
+            <button id="btn_subtract" class="color-dark-grey hoverable">
+              -
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="btn_clear"
+              class="color-magenta hoverable"
+              onclick="clearEntry()"
+            >
+              C
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_0"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(0)"
+              key
+            >
+              0
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_00"
+              class="color-grey hoverable"
+              onclick="handleNumberButtonPress(0);handleNumberButtonPress(0)"
+            >
+              00
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_decimal"
+              class="color-grey hoverable"
+              onclick="handleDecimalButtonPress()"
+            >
+              .
+            </button>
+          </td>
+          <td>
+            <button id="btn_equals" class="color-dark-grey hoverable">=</button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

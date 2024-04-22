@@ -5,13 +5,18 @@ body {
 .calculator {
   border: 0.1rem solid black;
   font-size: 1.5rem;
-  text-align: center;
   background-color: silver;
   padding: 0.5rem;
 }
 
 .calculator td {
-  border: 0.2rem groove black;
+  min-height: 2em;
+}
+
+.calculator button {
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
 }
 
 .screen {
