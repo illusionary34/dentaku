@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dentaku</title>
+    <meta charset="utf-8" />
+    <meta lang="jp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/dentaku.css" />
+    <script src="/dentaku.js"></script>
+  </head>
+
+  <body>
+    <table class="calculator">
+      <tr>
+        <td colspan="6" class="screen">1234567890</td>
+      </tr>
+      <tr>
+        <td class="force_hide_border" colspan="4">
+          <table class="slider-switch">
+            <tr>
+              <th><label for="rounding-f">F</label></th>
+              <th><label for="rounding-cut">CUT</label></th>
+              <th><label for="rounding-up">UP</label></th>
+              <th><label for="rounding-54">5/4</label></th>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="radio"
+                  id="rounding-f"
+                  name="rounding"
+                  value="f"
+                  checked
+                />
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  id="rounding-cut"
+                  name="rounding"
+                  value="cut"
+                />
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  id="rounding-up"
+                  name="rounding"
+                  value="up"
+                />
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  id="rounding-54"
+                  name="rounding"
+                  value="54"
+                />
+              </td>
+            </tr>
+          </table>
+          <table class="slider-switch">
+            <tr>
+              <th><label for="decimals-4">4</label></th>
+              <th><label for="decimals-2">2</label></th>
+              <th><label for="decimals-0">0</label></th>
+              <th><label for="decimals-add2">ADD2</label></th>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="radio"
+                  id="decimals-4"
+                  name="decimals"
+                  value="4"
+                  checked
+                />
+              </td>
+              <td>
+                <input type="radio" id="decimals-2" name="decimals" value="2" />
+              </td>
+              <td>
+                <input type="radio" id="decimals-0" name="decimals" value="0" />
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  id="decimals-add2"
+                  name="decimals"
+                  value="add2"
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="color-lightgreen hoverable">税抜</td>
+        <td class="color-lightgreen hoverable">税込</td>
+      </tr>
+      <tr>
+        <td class="color-dark-grey hoverable">時間計算</td>
+        <td class="color-dark-blue hoverable">M+</td>
+        <td class="color-dark-blue hoverable">M-</td>
+        <td class="color-dark-blue hoverable">MR</td>
+        <td class="color-dark-blue hoverable">MC</td>
+        <td class="color-dark-grey hoverable">GT</td>
+      </tr>
+      <tr>
+        <td class="color-dark-grey hoverable">AC</td>
+        <td class="color-grey hoverable">7</td>
+        <td class="color-grey hoverable">8</td>
+        <td class="color-grey hoverable">9</td>
+        <td class="color-dark-grey hoverable">%</td>
+        <td class="color-dark-grey hoverable">√</td>
+      </tr>
+      <tr>
+        <td class="color-dark-grey hoverable">+/-</td>
+        <td class="color-grey hoverable">4</td>
+        <td class="color-grey hoverable">5</td>
+        <td class="color-grey hoverable">6</td>
+        <td class="color-dark-grey hoverable">&times;</td>
+        <td class="color-dark-grey hoverable">&div;</td>
+      </tr>
+      <tr>
+        <td class="color-dark-grey hoverable">&#x2bc8;</td>
+        <td class="color-grey hoverable">1</td>
+        <td class="color-grey hoverable">2</td>
+        <td class="color-grey hoverable">3</td>
+        <td class="color-dark-grey hoverable" rowspan="2">+</td>
+        <td class="color-dark-grey hoverable">-</td>
+      </tr>
+      <tr>
+        <td class="color-magenta hoverable">C</td>
+        <td class="color-grey hoverable">0</td>
+        <td class="color-grey hoverable">00</td>
+        <td class="color-grey hoverable">.</td>
+        <td class="color-dark-grey hoverable">=</td>
+      </tr>
+    </table>
+  </body>
+</html>

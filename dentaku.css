@@ -1,0 +1,71 @@
+body {
+  font-family: sans-serif;
+}
+
+.calculator {
+  border: 0.1rem solid black;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: silver;
+  padding: 0.5rem;
+}
+
+.calculator td {
+  border: 0.2rem groove black;
+}
+
+.screen {
+  background-color: powderblue;
+  font-size: 2em;
+  text-align: right;
+  font-family: monospace;
+}
+
+.slider-switch {
+  display: inline;
+  font-size: 0.5em;
+  text-align: center;
+  padding: none;
+  margin: none;
+  border: none;
+  background-color: darkgray;
+}
+
+.slider-switch td {
+  border: none;
+}
+
+/* Colors and extra styles to overlay */
+
+.force_hide_border {
+  border-style: hidden !important;
+}
+
+.hoverable:hover {
+  border-color: blue;
+}
+
+.color-magenta {
+  background-color: palevioletred;
+  color: white;
+}
+
+.color-grey {
+  background-color: lightslategray;
+  color: white;
+}
+
+.color-dark-grey {
+  background-color: darkslategray;
+  color: white;
+}
+
+.color-dark-blue {
+  background-color: darkslateblue;
+  color: white;
+}
+
+.color-lightgreen {
+  background-color: cadetblue;
+  color: white;
+}
