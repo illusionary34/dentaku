@@ -14,7 +14,9 @@
     <div id="calculator">
       <table class="calculator">
         <tr>
-          <td id="calc_screen" colspan="6" class="screen">0</td>
+          <td colspan="6" class="screen">
+            <div id="main_operand">0</div>
+          </td>
         </tr>
         <tr>
           <td class="force_hide_border" colspan="4">
@@ -76,6 +78,7 @@
                     name="decimals"
                     value="4"
                     checked
+                    disabled
                   />
                 </td>
                 <td>
@@ -84,6 +87,7 @@
                     id="decimals-2"
                     name="decimals"
                     value="2"
+                    disabled
                   />
                 </td>
                 <td>
@@ -92,6 +96,7 @@
                     id="decimals-0"
                     name="decimals"
                     value="0"
+                    disabled
                   />
                 </td>
                 <td>
@@ -100,6 +105,7 @@
                     id="decimals-add2"
                     name="decimals"
                     value="add2"
+                    disabled
                   />
                 </td>
               </tr>
@@ -118,8 +124,8 @@
         </tr>
         <tr>
           <td>
-            <button id="btn_time_op" class="color-dark-grey hoverable">
-              時間計算
+            <button id="btn_mem_store" class="color-dark-blue hoverable">
+              MS
             </button>
           </td>
           <td>
@@ -148,7 +154,13 @@
         </tr>
         <tr>
           <td>
-            <button id="btn_ac" class="color-dark-grey hoverable">AC</button>
+            <button
+              id="btn_ac"
+              class="color-dark-grey hoverable"
+              onclick="clearAll()"
+            >
+              AC
+            </button>
           </td>
           <td>
             <button
@@ -178,19 +190,31 @@
             </button>
           </td>
           <td>
-            <button id="btn_percent" class="color-dark-grey hoverable">
+            <button
+              id="btn_percent"
+              class="color-dark-grey hoverable"
+              onclick="handleUnaryOperator('PERCENT')"
+            >
               %
             </button>
           </td>
           <td>
-            <button id="btn_sqrt" class="color-dark-grey hoverable">
+            <button
+              id="btn_sqrt"
+              class="color-dark-grey hoverable"
+              onclick="handleUnaryOperator('SQUARE_ROOT')"
+            >
               sqrt
             </button>
           </td>
         </tr>
         <tr>
           <td>
-            <button id="btn_plus_minus" class="color-dark-grey hoverable">
+            <button
+              id="btn_plus_minus"
+              class="color-dark-grey hoverable"
+              onclick="handleChangeSign()"
+            >
               +/-
             </button>
           </td>
@@ -222,12 +246,20 @@
             </button>
           </td>
           <td>
-            <button id="btn_multiply" class="color-dark-grey hoverable">
+            <button
+              id="btn_multiply"
+              class="color-dark-grey hoverable"
+              onclick="handleBinaryOperator('MULTIPLY')"
+            >
               &times;
             </button>
           </td>
           <td>
-            <button id="btn_divide" class="color-dark-grey hoverable">
+            <button
+              id="btn_divide"
+              class="color-dark-grey hoverable"
+              onclick="handleBinaryOperator('DIVIDE')"
+            >
               &div;
             </button>
           </td>
@@ -265,11 +297,21 @@
           </td>
           <td rowspan="2">
             <div style="height: 100%">
-              <button id="btn_add" class="color-dark-grey hoverable">+</button>
+              <button
+                id="btn_add"
+                class="color-dark-grey hoverable"
+                onclick="handleBinaryOperator('ADD')"
+              >
+                +
+              </button>
             </div>
           </td>
           <td>
-            <button id="btn_subtract" class="color-dark-grey hoverable">
+            <button
+              id="btn_subtract"
+              class="color-dark-grey hoverable"
+              onclick="handleBinaryOperator('SUBTRACT')"
+            >
               -
             </button>
           </td>
@@ -313,7 +355,13 @@
             </button>
           </td>
           <td>
-            <button id="btn_equals" class="color-dark-grey hoverable">=</button>
+            <button
+              id="btn_equals"
+              class="color-dark-grey hoverable"
+              onclick="sendCalculation()"
+            >
+              =
+            </button>
           </td>
         </tr>
       </table>
