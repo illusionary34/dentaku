@@ -1,7 +1,7 @@
 "use strict";
 
 //maximum digits in entry
-const MAX_DIGITS = 12;
+const MAX_DIGITS = 15;
 
 //additional operand is on the left side of a binary operator
 let additional_operand = null;
@@ -23,18 +23,34 @@ let main_operand_decimal_power = 0;
 let digits = 0;
 let decimal_just_placed = false;
 
+//when we just got our result, we need to handle input a little differently.
+let result_just_received = false;
+
 //Update the number on the display. Useful after input.
 function updateMainOperand() {
+  let out_string = "";
   //toFixed helps round out floating point inaccuracies to the user
-  let out_string = main_operand.toFixed(Math.abs(main_operand_decimal_power));
+  if (main_operand_decimal_power != null) {
+    out_string = main_operand.toFixed(Math.abs(main_operand_decimal_power));
+  } else {
+    out_string = main_operand.toString();
+  }
   if (decimal_just_placed) {
     out_string += ".";
   }
   document.getElementById("main_operand").innerText = out_string;
 }
 
+function displayMessage(message) {
+  document.getElementById("main_operand").innerText = message;
+}
+
 //append digit to the number on display, if it can fit
 function appendDigit(num) {
+  if (result_just_received == true) {
+    clearEntry();
+    result_just_received = false;
+  }
   if (digits >= MAX_DIGITS) {
     return;
   }
@@ -71,6 +87,10 @@ function clearAll() {
 }
 
 function handleDecimalButtonPress() {
+  if (result_just_received == true) {
+    clearEntry();
+    result_just_received = false;
+  }
   if (main_operand_decimal_power == 0 && digits < MAX_DIGITS) {
     decimal_just_placed = true;
     updateMainOperand();
@@ -104,8 +124,8 @@ function handleBinaryOperator(operator) {
     } else if (main_operand == 0) {
       binary_operator = operator;
     } else {
-      //TODO: enqueue the result of the calculation into the additional operand buffer
       sendCalculation();
+      handleBinaryOperator(operator);
     }
   }
   //otherwise throw error and stop execution
@@ -129,25 +149,42 @@ function sendCalculation() {
   if (additional_operand != null) {
     data.additional_operand = additional_operand;
   }
+  /*
   if (additional_operand_decimal_power != null) {
     data.additional_operand_decimal_power = additional_operand_decimal_power;
   }
+  */
   if (binary_operator != null) {
     data.binary_operator = binary_operator;
   }
   data.main_operand = main_operand;
-  data.main_operand_decimal_power = main_operand_decimal_power;
+  //data.main_operand_decimal_power = main_operand_decimal_power;
   if (unary_operator != null) {
     data.unary_operator = unary_operator;
   }
-  fakeSendCalculation(data);
+  let return_data = getResult(data);
+  if (return_data.status == "success") {
+    main_operand_decimal_power = null;
+    main_operand = return_data.result;
+    result_just_received = true;
+    updateMainOperand();
+  } else {
+    displayMessage("Error");
+    main_operand_decimal_power = null;
+    main_operand = null;
+  }
   unary_operator = null;
+  binary_operator = null;
+  additional_operand = null;
+  additional_operand_decimal_power = null;
   return;
 }
 
-//placeholder until we do actual network stuff
-function fakeSendCalculation(data) {
-  console.log(data);
-  clearAll();
-  document.getElementById("main_operand").innerText = "faked send";
+function getResult(data) {
+  const request = new XMLHttpRequest();
+  //make the request synchronous so that we wait for the result to come back
+  request.open("POST", "/calculate.php", false);
+  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request.send(JSON.stringify(data));
+  return JSON.parse(request.response);
 }

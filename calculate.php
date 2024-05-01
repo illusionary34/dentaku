@@ -55,7 +55,7 @@ if (isset($input_data['additional_operand'])) {
     if (!is_numeric($additional_operand)) {
         header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Content");
         $response["status"] = "error";
-        $response["detail"] = "additional_operand not a number";
+        $response["detail"] = "Additional_operand not a number";
         echo json_encode($response);
         die();
     }
@@ -65,7 +65,7 @@ if (isset($input_data['binary_operator'])) {
     if (array_search($binary_operator, constant("BINARY_OPERATOR_LIST")) === false) {
         header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Content");
         $response["status"] = "error";
-        $response["detail"] = "invalid binary operator";
+        $response["detail"] = "Invalid binary operator";
 
         echo json_encode($response);
         die();
@@ -76,7 +76,7 @@ if (isset($input_data['main_operand'])) {
     if (!is_numeric($main_operand)) {
         header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Content");
         $response["status"] = "error";
-        $response["detail"] = "main_operand not a number";
+        $response["detail"] = "Main_operand not a number";
         echo json_encode($response);
         die();
     }
@@ -85,7 +85,7 @@ if (isset($input_data['main_operand'])) {
 else {
     header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Content");
         $response["status"] = "error";
-        $response["detail"] = "missing main_operand";
+        $response["detail"] = "Missing main_operand";
         echo json_encode($response);
         die();
 }
@@ -94,7 +94,7 @@ if (isset($input_data['unary_operator'])) {
     if (array_search($unary_operator, constant("UNARY_OPERATOR_LIST")) === false) {
         header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Content");
         $response["status"] = "error";
-        $response["detail"] = "invalid unary operator";
+        $response["detail"] = "Invalid unary operator";
         echo json_encode($response);
         die();
     }
