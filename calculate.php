@@ -121,10 +121,11 @@ switch ($unary_operator) {
             case "SUBTRACT":
             case "ADD":
                 $main_operand = $additional_operand * ($main_operand / 100);
-                $binary_operator = "MULTIPLY";
+                //$binary_operator = "MULTIPLY";
                 break;
             case "MULTIPLY":
             case "DIVIDE":
+            default:
                 $main_operand = $main_operand / 100;
                 break;
         }

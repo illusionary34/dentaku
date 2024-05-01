@@ -22,7 +22,7 @@
           </td>
         </tr>
         <tr>
-          <td class="force_hide_border" colspan="4">
+          <td class="force_hide_border" colspan="3">
             <table class="slider-switch">
               <tr>
                 <th><label for="rounding-f">F</label></th>
@@ -115,44 +115,87 @@
             </table>
           </td>
           <td>
-            <button id="btn_tax_excluded" class="color-lightgreen hoverable">
+            <button
+              id="btn_set_tax_rate"
+              class="color-lightgreen hoverable"
+              onclick="handleSetTaxRate()"
+            >
+              税率設定
+            </button>
+          </td>
+          <td>
+            <button
+              id="btn_tax_excluded"
+              class="color-lightgreen hoverable"
+              onclick="handleTaxRemoved()"
+            >
               税抜
             </button>
           </td>
           <td>
-            <button id="btn_tax_included" class="color-lightgreen hoverable">
+            <button
+              id="btn_tax_included"
+              class="color-lightgreen hoverable"
+              onclick="handleTaxIncluded()"
+            >
               税込
             </button>
           </td>
         </tr>
         <tr>
           <td>
-            <button id="btn_mem_store" class="color-dark-blue hoverable">
+            <button
+              id="btn_mem_store"
+              class="color-dark-blue hoverable"
+              onclick="handleMemoryOperator('SET')"
+            >
               MS
             </button>
           </td>
           <td>
-            <button id="btn_mem_add" class="color-dark-blue hoverable">
+            <button
+              id="btn_mem_add"
+              class="color-dark-blue hoverable"
+              onclick="handleMemoryOperator('ADD')"
+            >
               M+
             </button>
           </td>
           <td>
-            <button id="btn_mem_subtract" class="color-dark-blue hoverable">
+            <button
+              id="btn_mem_subtract"
+              class="color-dark-blue hoverable"
+              onclick="handleMemoryOperator('SUBTRACT')"
+            >
               M-
             </button>
           </td>
           <td>
-            <button id="btn_mem_recall" class="color-dark-blue hoverable">
+            <button
+              id="btn_mem_recall"
+              class="color-dark-blue hoverable"
+              onclick="handleMemoryOperator('RECALL')"
+            >
               MR
             </button>
           </td>
           <td>
-            <button id="btn_mem_clear" class="color-dark-blue hoverable">
+            <button
+              id="btn_mem_clear"
+              class="color-dark-blue hoverable"
+              onclick="handleMemoryOperator('CLEAR')"
+            >
               MC
             </button>
           </td>
           <td>
-            <button id="btn_gt" class="color-dark-grey hoverable">GT</button>
+            <button
+              id="btn_gt"
+              class="color-dark-grey hoverable"
+              onclick="showGrandTotal()"
+            >
+              GT
+            </button>
           </td>
         </tr>
         <tr>
@@ -269,7 +312,13 @@
         </tr>
         <tr>
           <td>
-            <button id="btn_right" class="color-dark-grey hoverable">▶</button>
+            <button
+              id="btn_right"
+              class="color-dark-grey hoverable"
+              onclick="removeDigit()"
+            >
+              ⌫
+            </button>
           </td>
           <td>
             <button
@@ -304,6 +353,7 @@
                 id="btn_add"
                 class="color-dark-grey hoverable"
                 onclick="handleBinaryOperator('ADD')"
+                style="height: 3.35em"
               >
                 +
               </button>

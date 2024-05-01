@@ -26,6 +26,12 @@ let decimal_just_placed = false;
 //when we just got our result, we need to handle input a little differently.
 let result_just_received = false;
 
+//memory value and grand total values
+const memory_operator_list = ["CLEAR", "SET", "ADD", "SUBTRACT", "RECALL"];
+let mem_val = 0;
+let tax_rate = 0.1;
+let grand_total = 0;
+
 //Update the number on the display. Useful after input.
 function updateMainOperand() {
   let out_string = "";
@@ -72,6 +78,26 @@ function appendDigit(num) {
   updateMainOperand();
 }
 
+function removeDigit() {
+  if (digits < 1) return;
+  if (main_operand_decimal_power == 0) {
+    main_operand /= 10;
+    main_operand = Math.trunc(main_operand);
+  } else {
+    //multiply the number by 10^x where x is the amount of decimal digits
+    //then divide by 10. then return the decimal by dividing by 10^x
+    //probably not numerically stable but worth a shot
+    let temp_value = main_operand;
+    temp_value *= Math.pow(10, -1 * main_operand_decimal_power);
+    temp_value /= 10;
+    temp_value = Math.trunc(temp_value);
+    main_operand_decimal_power++;
+    temp_value *= Math.pow(10, main_operand_decimal_power);
+    main_operand = temp_value;
+  }
+  updateMainOperand();
+}
+
 function clearEntry() {
   main_operand = 0;
   main_operand_decimal_power = 0;
@@ -83,7 +109,15 @@ function clearAll() {
   additional_operand = null;
   additional_operand_decimal_power = null;
   binary_operator = null;
+  grand_total = 0;
   clearEntry();
+}
+
+function showGrandTotal() {
+  clearEntry();
+  main_operand = grand_total;
+  updateMainOperand();
+  result_just_received = true;
 }
 
 function handleDecimalButtonPress() {
@@ -144,6 +178,52 @@ function handleUnaryOperator(operator) {
   }
 }
 
+function handleMemoryOperator(operator) {
+  if (memory_operator_list.includes(operator)) {
+    switch (operator) {
+      case "CLEAR":
+        mem_val = 0;
+        break;
+      case "SET":
+        mem_val = main_operand;
+        break;
+      case "RECALL":
+        main_operand = mem_val;
+        main_operand_decimal_power = null;
+        result_just_received = true;
+        updateMainOperand();
+        break;
+      case "ADD":
+        sendCalculation();
+        mem_val += main_operand;
+        break;
+      case "SUBTRACT":
+        sendCalculation();
+        mem_val -= main_operand;
+        break;
+    }
+  } else {
+    throw ValueError();
+  }
+}
+
+function handleTaxIncluded() {
+  handleBinaryOperator("MULTIPLY");
+  main_operand = 1 + tax_rate;
+  sendCalculation();
+}
+
+function handleTaxRemoved() {
+  handleBinaryOperator("DIVIDE");
+  main_operand = 1 + tax_rate;
+  sendCalculation();
+}
+
+function handleSetTaxRate() {
+  tax_rate = main_operand;
+  clearEntry();
+}
+
 function sendCalculation() {
   let data = {};
   if (additional_operand != null) {
@@ -166,6 +246,7 @@ function sendCalculation() {
   if (return_data.status == "success") {
     main_operand_decimal_power = null;
     main_operand = return_data.result;
+    grand_total += return_data.result;
     result_just_received = true;
     updateMainOperand();
   } else {
