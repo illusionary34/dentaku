@@ -32,6 +32,10 @@ let mem_val = 0;
 let tax_rate = 0.1;
 let grand_total = 0;
 
+const rounding_mode_list = ["F", "CUT", "UP", "54"];
+let rounding_mode = "F";
+let rounding_power = -4;
+
 //Update the number on the display. Useful after input.
 function updateMainOperand() {
   let out_string = "";
@@ -207,6 +211,22 @@ function handleMemoryOperator(operator) {
   }
 }
 
+function getRoundingMode() {
+  let mode = document.querySelector("input[name=rounding]:checked").value;
+  if (rounding_mode_list.includes(mode)) {
+    rounding_mode = mode;
+  } else {
+    throw ValueError();
+  }
+}
+
+function updateRoundingPower() {
+  let value = document.querySelector("input[name=decimals]:checked").value;
+  value = Number(value);
+  rounding_power = value;
+}
+
+//tax functions are just implemented on client side
 function handleTaxIncluded() {
   handleBinaryOperator("MULTIPLY");
   main_operand = 1 + tax_rate;
@@ -225,6 +245,7 @@ function handleSetTaxRate() {
 }
 
 function sendCalculation() {
+  getRoundingMode();
   let data = {};
   if (additional_operand != null) {
     data.additional_operand = additional_operand;
@@ -244,9 +265,24 @@ function sendCalculation() {
   }
   let return_data = getResult(data);
   if (return_data.status == "success") {
-    main_operand_decimal_power = null;
-    main_operand = return_data.result;
-    grand_total += return_data.result;
+    let result = return_data.result;
+    switch (rounding_mode) {
+      case "CUT":
+        result = decimalAdjust("floor", result, rounding_power);
+        break;
+      case "UP":
+        result = decimalAdjust("ceil", result, rounding_power);
+      case "54":
+        result = decimalAdjust("round", result, rounding_power);
+      default:
+    }
+    if (rounding_mode != "F") {
+      main_operand_decimal_power = rounding_power;
+    } else {
+      main_operand_decimal_power = null;
+    }
+    main_operand = result;
+    grand_total += result;
     result_just_received = true;
     updateMainOperand();
   } else {
@@ -268,4 +304,34 @@ function getResult(data) {
   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   request.send(JSON.stringify(data));
   return JSON.parse(request.response);
+}
+
+//Taken from MDN. Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+/**
+ * Adjusts a number to the specified digit.
+ *
+ * @param {"round" | "floor" | "ceil"} type The type of adjustment.
+ * @param {number} value The number.
+ * @param {number} exp The exponent (the 10 logarithm of the adjustment base).
+ * @returns {number} The adjusted value.
+ */
+function decimalAdjust(type, value, exp) {
+  type = String(type);
+  if (!["round", "floor", "ceil"].includes(type)) {
+    throw new TypeError(
+      "The type of decimal adjustment must be one of 'round', 'floor', or 'ceil'.",
+    );
+  }
+  exp = Number(exp);
+  value = Number(value);
+  if (exp % 1 !== 0 || Number.isNaN(value)) {
+    return NaN;
+  } else if (exp === 0) {
+    return Math[type](value);
+  }
+  const [magnitude, exponent = 0] = value.toString().split("e");
+  const adjustedValue = Math[type](`${magnitude}e${exponent - exp}`);
+  // Shift back
+  const [newMagnitude, newExponent = 0] = adjustedValue.toString().split("e");
+  return Number(`${newMagnitude}e${+newExponent + exp}`);
 }
