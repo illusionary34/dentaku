@@ -223,7 +223,7 @@ function getRoundingMode() {
 function updateRoundingPower() {
   let value = document.querySelector("input[name=decimals]:checked").value;
   value = Number(value);
-  rounding_power = value;
+  rounding_power = -1 * value;
 }
 
 //tax functions are just implemented on client side
@@ -246,6 +246,7 @@ function handleSetTaxRate() {
 
 function sendCalculation() {
   getRoundingMode();
+  updateRoundingPower();
   let data = {};
   if (additional_operand != null) {
     data.additional_operand = additional_operand;
@@ -334,4 +335,72 @@ function decimalAdjust(type, value, exp) {
   // Shift back
   const [newMagnitude, newExponent = 0] = adjustedValue.toString().split("e");
   return Number(`${newMagnitude}e${+newExponent + exp}`);
+}
+
+function handleKeyPress(event) {
+  let key = event.key;
+  switch (key) {
+    case "0":
+      handleNumberButtonPress(0);
+      break;
+    case "1":
+      handleNumberButtonPress(1);
+      break;
+    case "2":
+      handleNumberButtonPress(2);
+      break;
+    case "3":
+      handleNumberButtonPress(3);
+      break;
+    case "4":
+      handleNumberButtonPress(4);
+      break;
+    case "5":
+      handleNumberButtonPress(5);
+      break;
+    case "6":
+      handleNumberButtonPress(6);
+      break;
+    case "7":
+      handleNumberButtonPress(7);
+      break;
+    case "8":
+      handleNumberButtonPress(8);
+      break;
+    case "9":
+      handleNumberButtonPress(9);
+      break;
+    case "0":
+      handleNumberButtonPress(0);
+      break;
+    case "/":
+      //prevent the "/" key from opening quick search
+      event.preventDefault();
+      handleBinaryOperator("DIVIDE");
+      break;
+    case "*":
+      handleBinaryOperator("MULTIPLY");
+      break;
+    case "-":
+      handleBinaryOperator("SUBTRACT");
+      break;
+    case "+":
+      handleBinaryOperator("ADD");
+      break;
+    case "Enter":
+      sendCalculation();
+      break;
+    case ".":
+      handleDecimalButtonPress();
+      break;
+    case "%":
+      handleUnaryOperator("PERCENT");
+      break;
+    case "Escape":
+      clearEntry();
+      break;
+    case "Backspace":
+      removeDigit();
+      break;
+  }
 }

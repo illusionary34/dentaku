@@ -9,7 +9,7 @@
     <script src="/dentaku.js"></script>
   </head>
 
-  <body>
+  <body onkeydown="handleKeyPress(event)">
     <noscript>
       Please enable javascript to use the calculator. <br />
       Javascriptを可能にして電卓は利用できます。
@@ -107,7 +107,7 @@
               class="color-lightgreen hoverable"
               onclick="handleSetTaxRate()"
             >
-              税率設定
+              税率
             </button>
           </td>
           <td>
