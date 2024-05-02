@@ -273,6 +273,7 @@ function sendCalculation() {
         break;
       case "UP":
         result = decimalAdjust("ceil", result, rounding_power);
+        break;
       case "54":
         result = decimalAdjust("round", result, rounding_power);
       default:
