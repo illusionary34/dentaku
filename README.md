@@ -1,14 +1,14 @@
-#PHP、Javascriptを使っている電卓
+# PHP、Javascriptを使っている電卓
 
 [ここで使ってみてください](http://dentaku.ap-northeast-3.elasticbeanstalk.com/dentaku.html)
 
-##どうしてPHP？
+## どうしてPHP？
 
 課題にそれが必要でした。インタネットによくある電卓はサーバーで計算しません。「どうやってPHPを使うべきか」を考えて、APIとして使おうと思っていました。
 入力してから、ページがサーバーに数と演算を送ります。サーバーが精算して、答えをまたクライエントに送ります。
 メモリ機能はクライエントで管理されています。
 
-##どんな電卓をマネしましたか？
+## どんな電卓をマネしましたか？
 
 このCASIO DS-12WT。
 ![CASIO DS-12WT](./readme_assets/dentaku.jpg)
