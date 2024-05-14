@@ -371,9 +371,6 @@ function handleKeyPress(event) {
     case "9":
       handleNumberButtonPress(9);
       break;
-    case "0":
-      handleNumberButtonPress(0);
-      break;
     case "/":
       //prevent the "/" key from opening quick search
       event.preventDefault();
